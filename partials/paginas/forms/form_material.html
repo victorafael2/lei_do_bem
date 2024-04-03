@@ -1,0 +1,106 @@
+<p>
+    <button class="btn btn-soft-success" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseTerceiro" aria-expanded="false"
+        aria-controls="collapseTerceiro">
+        Adicionar Material de Consumo
+    </button>
+</p>
+
+
+<div>
+    <div class="collapse " id="collapseTerceiro">
+        <div class="card card-body mb-0">
+<form id="detail_form">
+
+    <div class="form-group row mb-2">
+        <input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo $id_projeto?>">
+
+
+    </div>
+
+    <div class="form-group row mb-2">
+        <label for="cpf_cnpj" class="col-sm-2 col-form-label">Descrição do Itens</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" id="desc_itens" name="desc_itens" required>
+        </div>
+
+        <label for="nome" class="col-sm-2 col-form-label">Valor</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" id="valor" name="valor" required>
+        </div>
+    </div>
+
+    <div class="form-group row mb-2">
+        <label for="example-textarea" class="form-label">Detalhamento</label>
+        <textarea class="form-control" id="detalhe" name="detalhe" rows="5"></textarea>
+
+
+    </div>
+
+    <!-- Restante do formulário mantido como no exemplo anterior -->
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <input class="btn btn-success" id="btnSalvar" type="submit" value="Salvar">
+            <input class="btn btn-info" type="reset" value="Limpar">
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    $('#detail_form').submit(function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+
+
+
+
+        // Envia os dados do formulário via AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'forms/save/save_material.php', // URL para onde enviar os dados
+            data: $('#detail_form').serialize(), // Serializa os dados do formulário
+            success: function(response) {
+                // Exibe uma mensagem de sucesso
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Formulário salvo com sucesso.',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+    // Recupera o ID do projeto do PHP
+    var projectId = <?php echo $id_projeto; ?>;
+
+    // Recarrega a lista após o sucesso com o ID do projeto
+    $("#list_terc").load("/paginas/forms/list_terc.php?id_projeto=" + projectId);
+}
+
+                });
+                // Limpa os campos do formulário
+                $('#detail_form')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                // Em caso de erro, exibe uma mensagem de erro
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.',
+                });
+            }
+        });
+    });
+
+    function validarCPF(cpf) {
+        // Função para validar o CPF
+        // Implementação da validação do CPF aqui
+        // Retornar true se o CPF for válido, false caso contrário
+        return true; // Exemplo: sempre retorna true para fins de demonstração
+    }
+});
+
+</script>

@@ -1,0 +1,241 @@
+  <p>
+                                <button class="btn btn-soft-success" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseWidthExample" aria-expanded="false"
+                                    aria-controls="collapseWidthExample">
+                                    Adicionar Colaborador
+                                </button>
+                            </p>
+
+                            <div>
+                                <div class="collapse " id="collapseWidthExample">
+                                    <div class="card card-body mb-0">
+
+                                        <form id="rh_form">
+                                            <div class="form-group row mb-2">
+                                                <input class="form-control d-none" type="text" id="projeto_id"
+                                                    name="projeto_id" required value="<?php echo $id_projeto?>">
+                                                <label for="cpf" class="col-sm-2 col-form-label">CPF:</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" id="cpf" name="cpf"
+                                                        required>
+                                                </div>
+
+                                                <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" id="nome" name="nome"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-2">
+                                                <label for="titulacao"
+                                                    class="col-sm-2 col-form-label">Titulação:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" id="titulacao" name="titulacao"
+                                                        required>
+                                                        <option value="">Selecione...</option>
+                                                        <option value="Tecnólogo">Tecnólogo</option>
+                                                        <option value="Técnico de Nível Médio">Técnico de Nível Médio
+                                                        </option>
+                                                        <option value="Graduado">Graduado</option>
+                                                        <option value="Pós Graduado">Pós Graduado</option>
+                                                        <option value="Mestre">Mestre</option>
+                                                        <option value="Doutor">Doutor</option>
+                                                    </select>
+                                                </div>
+
+                                                <label for="total_horas" class="col-sm-2 col-form-label">Total de Horas
+                                                    -
+                                                    mês:</label>
+                                                <div class="col-sm-4">
+
+                                                    <input type="text" class="form-control" id="total_horas"
+                                                        name="total_horas" placeholder="hh:mm" required>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-2">
+                                                <label for="dedicacao"
+                                                    class="col-sm-2 col-form-label">Dedicação:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" id="dedicacao" name="dedicacao"
+                                                        required>
+                                                        <option value="">Selecione...</option>
+                                                        <option value="Exclusiva">Exclusiva</option>
+                                                        <option value="Parcial">Parcial</option>
+                                                    </select>
+                                                </div>
+
+                                                <label for="horas_dedicadas" class="col-sm-2 col-form-label">Horas
+                                                    Dedicadas:</label>
+                                                <div class="col-sm-4">
+
+                                                    <input type="text" class="form-control" id="horas_dedicadas"
+                                                        name="horas_dedicadas" placeholder="hh:mm" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-2">
+                                                <label for="mes" class="col-sm-2 col-form-label">Mês:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" id="mes" name="mes" required>
+                                                        <option value="">Selecione...</option>
+                                                        <option value="Janeiro">Janeiro</option>
+                                                        <option value="Fevereiro">Fevereiro</option>
+                                                        <option value="Março">Março</option>
+                                                        <option value="Abril">Abril</option>
+                                                        <option value="Maio">Maio</option>
+                                                        <option value="Junho">Junho</option>
+                                                        <option value="Julho">Julho</option>
+                                                        <option value="Agosto">Agosto</option>
+                                                        <option value="Setembro">Setembro</option>
+                                                        <option value="Outubro">Outubro</option>
+                                                        <option value="Novembro">Novembro</option>
+                                                        <option value="Dezembro">Dezembro</option>
+                                                    </select>
+                                                </div>
+
+                                                <label for="salario_encargos" class="col-sm-2 col-form-label">Salário +
+                                                    encargos
+                                                    (filtro para os meses do ano):</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" id="salario_encargos"
+                                                        name="salario_encargos" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-10 offset-sm-2">
+                                                    <input class="btn btn-success" type="submit" value="Salvar">
+                                                    <input class="btn btn-info" type="reset" value="Limpar">
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <script>
+                                function converterParaMinutos() {
+                                    var horasMensaisInput = document.getElementById('horasMensais').value;
+                                    var partes = horasMensaisInput.split(':');
+                                    var horas = parseInt(partes[0]);
+                                    var minutos = parseInt(partes[1]);
+
+                                    var totalMinutos = horas * 60 + minutos;
+
+                                    // Agora você pode usar 'totalMinutos' para seus cálculos
+                                    console.log("Total de minutos: " + totalMinutos);
+                                }
+                                </script>
+
+                                <script>
+                                $(document).ready(function() {
+
+
+
+
+                                    $('#rh_form').submit(function(e) {
+                                        e.preventDefault(); // Impede o envio padrão do formulário
+
+                                        var cpf = $('#cpf').val();
+                                        if (validarCPF(cpf)) {
+                                            // Se o CPF for válido, envia os dados via AJAX
+                                            $.ajax({
+                                                        type: 'POST',
+                                                        url: 'forms/save/save_rh_form.php', // URL para onde enviar os dados
+                                                        data: $(this).serialize(), // Serializa os dados do formulário
+                                                        success: function(response) {
+                                                            // Exibe uma mensagem de sucesso
+                                                            Swal.fire({
+                                                                icon: 'success',
+                                                                title: 'Sucesso!',
+                                                                text: 'Formulário salvo com sucesso.'
+                                                            }).then((result) => {
+                                                                if (result.isConfirmed) {
+                                                                    // Recarrega a lista de recursos humanos após o sucesso
+                                                                    $("#lista_recursos_humanos").load("forms/list_rh.php");
+                                                                }
+                                                            });
+                                                            // Limpa os campos do formulário
+                                                            $('#rh_form')[0].reset();
+                                                        },
+                                                error: function(xhr, status, error) {
+                                                    // Em caso de erro, exibe uma mensagem de erro
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Erro!',
+                                                        text: 'Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.'
+                                                    });
+                                                }
+                                            });
+                                        } else {
+                                            // Se o CPF for inválido, exibe uma mensagem de erro
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'CPF inválido!',
+                                                text: 'Por favor, insira um CPF válido.'
+                                            });
+                                        }
+                                    });
+
+                                    function validarCPF(cpf) {
+                                        cpf = cpf.replace(/[^\d]+/g, '');
+                                        if (cpf == '') return false;
+                                        // Elimina CPFs invalidos conhecidos
+                                        if (cpf.length != 11 ||
+                                            cpf == "00000000000" ||
+                                            cpf == "11111111111" ||
+                                            cpf == "22222222222" ||
+                                            cpf == "33333333333" ||
+                                            cpf == "44444444444" ||
+                                            cpf == "55555555555" ||
+                                            cpf == "66666666666" ||
+                                            cpf == "77777777777" ||
+                                            cpf == "88888888888" ||
+                                            cpf == "99999999999")
+                                            return false;
+                                        // Valida 1o digito
+                                        add = 0;
+                                        for (i = 0; i < 9; i++)
+                                            add += parseInt(cpf.charAt(i)) * (10 - i);
+                                        rev = 11 - (add % 11);
+                                        if (rev == 10 || rev == 11)
+                                            rev = 0;
+                                        if (rev != parseInt(cpf.charAt(9)))
+                                            return false;
+                                        // Valida 2o digito
+                                        add = 0;
+                                        for (i = 0; i < 10; i++)
+                                            add += parseInt(cpf.charAt(i)) * (11 - i);
+                                        rev = 11 - (add % 11);
+                                        if (rev == 10 || rev == 11)
+                                            rev = 0;
+                                        if (rev != parseInt(cpf.charAt(10)))
+                                            return false;
+                                        return true;
+                                    }
+
+                                    document.getElementById("cpf").addEventListener("blur", function() {
+                                        var cpf = this.value;
+                                        if (!validarCPF(cpf)) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'CPF inválido!',
+                                                text: 'Por favor, insira um CPF válido.',
+                                                confirmButtonColor: '#3085d6',
+                                                confirmButtonText: 'OK'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    document.getElementById("cpf").value = "";
+                                                    document.getElementById("cpf").focus();
+                                                }
+                                            });
+                                        }
+                                    });
+                                });
+                                </script>

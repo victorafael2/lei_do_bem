@@ -1,0 +1,153 @@
+<p>
+    <button class="btn btn-soft-success" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseTerceiro" aria-expanded="false"
+        aria-controls="collapseTerceiro">
+        Adicionar Terceiro
+    </button>
+</p>
+
+
+<div>
+    <div class="collapse " id="collapseTerceiro">
+        <div class="card card-body mb-0">
+<form id="terc_form">
+
+    <div class="form-group row mb-2">
+        <input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo $id_projeto?>">
+
+        <label for="tipo" class="col-sm-2 col-form-label">Tipo:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="tipo" name="tipo" required>
+                <option value="">Selecione...</option>
+                <option value="universidade">Universidade</option>
+                <option value="instituicao_pesquisa">Instituição de Pesquisa</option>
+                <option value="inventor_independente">Inventor Independente</option>
+                <option value="micro_empresa">Micro Empresa</option>
+                <option value="empresa_pequeno_porte">Empresa de Pequeno Porte</option>
+                <option value="apoio_tecnico">Serviço de Apoio Técnico</option>
+                <option value="tecnologia_industrial">Tecnologia Industrial Básica</option>
+                <option value="viagem">Viagem</option>
+            </select>
+        </div>
+
+        <label for="situacao" class="col-sm-2 col-form-label">Situação:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="situacao" name="situacao" required>
+                <option value="">Selecione...</option>
+                <option value="cpf">CPF</option>
+                <option value="cnpj">CNPJ</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row mb-2">
+        <label for="cpf_cnpj" class="col-sm-2 col-form-label">CPF/CNPJ:</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" id="cpf_cnpj" name="cpf_cnpj" required>
+        </div>
+
+        <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" id="nome" name="nome" required>
+        </div>
+    </div>
+
+    <!-- Restante do formulário mantido como no exemplo anterior -->
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <input class="btn btn-success" id="btnSalvar" type="submit" value="Salvar">
+            <input class="btn btn-info" type="reset" value="Limpar">
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    $('#terc_form').submit(function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        var cpf_cnpj = $('#cpf_cnpj').val();
+        var situacao = $('#situacao').val();
+
+        // Verifica se o CPF/CNPJ está vazio
+        if (!cpf_cnpj) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Por favor, preencha o campo CPF/CNPJ.',
+            });
+            return;
+        }
+
+        // Verifica se a situação (CPF/CNPJ) foi selecionada
+        if (!situacao) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Por favor, selecione a situação (CPF/CNPJ).',
+            });
+            return;
+        }
+
+        // Verifica se o CPF/CNPJ é válido
+        if (situacao === 'cpf' && !validarCPF(cpf_cnpj)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'CPF inválido!',
+                text: 'Por favor, insira um CPF válido.',
+            });
+            return;
+        }
+
+        // Envia os dados do formulário via AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'forms/save/save_terc_form.php', // URL para onde enviar os dados
+            data: $('#terc_form').serialize(), // Serializa os dados do formulário
+            success: function(response) {
+                // Exibe uma mensagem de sucesso
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Formulário salvo com sucesso.',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+    // Recupera o ID do projeto do PHP
+    var projectId = <?php echo $id_projeto; ?>;
+
+    // Recarrega a lista após o sucesso com o ID do projeto
+    $("#list_terc").load("/paginas/forms/list_terc.php?id_projeto=" + projectId);
+}
+
+                });
+                // Limpa os campos do formulário
+                $('#terc_form')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                // Em caso de erro, exibe uma mensagem de erro
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.',
+                });
+            }
+        });
+    });
+
+    function validarCPF(cpf) {
+        // Função para validar o CPF
+        // Implementação da validação do CPF aqui
+        // Retornar true se o CPF for válido, false caso contrário
+        return true; // Exemplo: sempre retorna true para fins de demonstração
+    }
+});
+
+</script>
+
+
+

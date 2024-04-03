@@ -44,7 +44,7 @@
         <!--- Sidemenu -->
         <ul class="side-nav">
 
-            <li class="side-nav-title">Navigation</li>
+            <li class="side-nav-title">Menu</li>
 
             <!-- <li class="side-nav-item">
                 <a href="index.php?id=1" class="side-nav-link">
@@ -54,7 +54,7 @@
                 </a>
             </li> -->
 
-                <?php
+                <!-- <?php
 
 
                 // Consulta SQL para obter os itens do menu da tabela 'pages'
@@ -81,7 +81,60 @@
 
                 // Fechar conexão com o banco de dados
                 // $conn->close();
-                ?>
+                ?> -->
+
+<?php
+// Consulta SQL para obter os itens do menu da tabela 'pages'
+$sql = "SELECT * FROM pages where ver = 'sim'";
+$result = $conn->query($sql);
+
+// Verificar se há resultados da consulta
+if ($result->num_rows > 0) {
+    // Inicializar um array para armazenar os itens do menu agrupados por projeto
+    $menu_por_projeto = array();
+
+    // Organizar os itens do menu por projeto
+    while ($row = $result->fetch_assoc()) {
+        $projeto = $row["categoria"];
+        if (!isset($menu_por_projeto[$projeto])) {
+            $menu_por_projeto[$projeto] = array();
+        }
+        $menu_por_projeto[$projeto][] = $row;
+    }
+
+    // Exibir os itens do menu agrupados por projeto
+    foreach ($menu_por_projeto as $projeto => $itens) {
+        echo '<li class="side-nav-item">';
+        echo '<a data-bs-toggle="collapse" href="#' . $projeto . '" aria-expanded="false" aria-controls="' . $projeto . '" class="side-nav-link">';
+        // Adicionar ícone ao lado do nome do projeto usando a classe do ícone do banco de dados
+        echo '<i class="' . $itens[0]["icone"] . '"></i>';
+        echo '<span>' . $projeto . '</span>';
+        echo '<span class="menu-arrow"></span>';
+        echo '</a>';
+        echo '<div class="collapse" id="' . $projeto . '">';
+        echo '<ul class="side-nav-second-level">';
+
+        // Exibir os itens do menu dentro deste projeto
+        foreach ($itens as $item) {
+            echo '<li class="side-nav-item">';
+
+            echo '<a href="index.php?id=' . $item["id"] . '"><i class="' .  $item["icone"] . '"></i>  ' . $item["nome_pagina"] . '</a>';
+            echo '</li>';
+        }
+
+        echo '</ul>';
+        echo '</div>';
+        echo '</li>';
+    }
+} else {
+    echo "0 resultados";
+}
+?>
+
+
+
+
+
 
 
             <li class="side-nav-title d-none">Custom</li>

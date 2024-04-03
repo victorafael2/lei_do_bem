@@ -2,7 +2,7 @@
 include ("../../conexao/database.php");
 
 // Recuperar os dados do formulário
-$ano_base = $_POST['ano_base'];
+$ano_base = $_POST['ano_mes_base'];
 $nome_projeto = $_POST['nome_projeto'];
 $detalhamento_projeto = $_POST['detalhamento_projeto'];
 $tipo_projeto = $_POST['tipo_projeto'];

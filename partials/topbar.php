@@ -393,7 +393,7 @@
                     <!-- item-->
                     <a href="partials/logout.php" class="dropdown-item">
                         <i class="mdi mdi-logout me-1"></i>
-                        <span>Logout</span>
+                        <span>|Sair</span>
                     </a>
                 </div>
             </li>

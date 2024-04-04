@@ -20,6 +20,40 @@
 
 
 <form id="formProjeto">
+
+<?php
+// Conexão com o banco de dados
+
+
+
+
+// Query para selecionar as opções do banco de dados
+$sql = "SELECT id, company_name FROM empresas";
+$result = $conn->query($sql);
+?>
+
+<label for="empresa">Empresa:</label><br>
+<select class="form-control" id="tipo_projeto" name="tipo_projeto">
+    <?php
+    if ($result->num_rows > 0) {
+        // Iterar sobre os resultados da consulta
+        while ($row = $result->fetch_assoc()) {
+            // Gerar as opções com base nos dados do banco de dados
+            echo '<option value="' . $row['id'] . '">' . $row['company_name'] . '</option>';
+        }
+    } else {
+        echo '<option value="">Nenhuma empresa encontrada</option>';
+    }
+    ?>
+</select><br>
+
+<?php
+// Fechar conexão com o banco de dados
+$conn->close();
+?>
+
+
+
         <label for="ano_base">Ano Base:</label><br>
         <input class="form-control" type="month" id="ano_mes_base" name="ano_mes_base" ><br>
 

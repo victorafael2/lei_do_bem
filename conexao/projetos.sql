@@ -1,0 +1,20 @@
+CREATE TABLE `projetos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `empresa` int NOT NULL DEFAULT (0),
+  `ano_base` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nome_projeto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `detalhamento_projeto` text COLLATE utf8mb4_unicode_ci,
+  `tipo_projeto` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `area_projeto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `natureza_projeto` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `palavras_chave` text COLLATE utf8mb4_unicode_ci,
+  `elemento_tecnologico` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `metodologia` text COLLATE utf8mb4_unicode_ci,
+  `barreiras_desafios` text COLLATE utf8mb4_unicode_ci,
+  `plurianual` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `data_inicio` date DEFAULT NULL,
+  `data_termino` date DEFAULT NULL,
+  `resultados_economicos` text COLLATE utf8mb4_unicode_ci,
+  `resultados_inovacao` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci

@@ -17,9 +17,9 @@
 // }
 
     $servername = "45.152.44.103";
-    $username = "u358437276_define";
-    $password = "Vr88094852.";
-    $connname = "u358437276_define";
+    $username = "u358437276_leidobem";
+    $password = "vr88094852";
+    $connname = "u358437276_leidobem";
             // $servidor = "localhost";
             // $usuario = "xpeer_adm";
             // $senha = "xpeer_adm_victor";

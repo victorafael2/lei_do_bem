@@ -64,19 +64,57 @@
                     <?php endif; ?>
 
                     <!-- Se não houver erro, exibir o formulário de login -->
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="mb-3">
-                            <label for="emailaddress" class="form-label">Email</label>
-                            <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="Enter your email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Senha</label>
-                            <input class="form-control" type="password" required="" id="password" name="senha" placeholder="Enter your password">
-                        </div>
-                        <div class="d-grid mb-0 text-center">
-                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-login"></i> Log In </button>
-                        </div>
-                    </form>
+                   <!-- Adicione um ID ao formulário para referenciá-lo no JavaScript -->
+<form id="loginForm" method="post">
+    <div class="mb-3">
+        <label for="emailaddress" class="form-label">Email</label>
+        <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="Enter your email">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input class="form-control" type="password" required="" id="password" name="senha" placeholder="Enter your password">
+    </div>
+    <div class="d-grid mb-0 text-center">
+        <button id="loginButton" class="btn btn-primary" type="button"><i class="mdi mdi-login"></i> Log In </button>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    document.getElementById("loginButton").addEventListener("click", function() {
+        var form = document.getElementById("loginForm");
+        var formData = new FormData(form);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = xhr.responseText;
+                if (response.indexOf("Credenciais inválidas") === -1) {
+                    // Se não houver mensagem de erro, redirecione após um curto atraso
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login bem-sucedido!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.href = "page.php";
+                    });
+                } else {
+                    // Se houver mensagem de erro, exiba o alerta de erro
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Usuário ou Senha Invalidos'
+                    });
+                }
+            }
+        };
+        xhr.send(formData);
+    });
+</script>
+
 
                     <!-- end form-->
                 </div>

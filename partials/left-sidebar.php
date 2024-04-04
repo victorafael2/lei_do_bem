@@ -68,7 +68,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo '<li class="side-nav-item">';
 
-                        echo '<a href="index.php?id=' . $row["id"] . '" class="side-nav-link">';
+                        echo '<a href="page.php?id=' . $row["id"] . '" class="side-nav-link">';
                         echo ' <i class="'. $row["icone"] .'"></i>';
                         echo '<span>' . $row["nome_pagina"] . '</span>';
                         echo '</a>';
@@ -118,7 +118,7 @@ if ($result->num_rows > 0) {
         foreach ($itens as $item) {
             echo '<li class="side-nav-item">';
 
-            echo '<a href="index.php?id=' . $item["id"] . '"><i class="' .  $item["icone"] . '"></i>  ' . $item["nome_pagina"] . '</a>';
+            echo '<a href="page.php?id=' . $item["id"] . '"><i class="' .  $item["icone"] . '"></i>  ' . $item["nome_pagina"] . '</a>';
             echo '</li>';
         }
 

@@ -298,6 +298,11 @@ if (isset($_GET['id_projeto'])) {
                                 <input class="btn btn-success" id="btnSalvar" type="submit" value="Enviar">
 
                             </form>
+
+
+
+                            <div id="tabela_projetos_patentes">
+            </div>
                 </div>
 
         <?php
@@ -375,11 +380,11 @@ if (isset($_GET['id_projeto'])) {
                 <div class="row">
                     <div class="col-sm-3 mb-2 mb-sm-0">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active show" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <a class="nav-link active show" id="e_nacional-tab" data-bs-toggle="pill" href="#e_nacional" role="tab" aria-controls="e_nacional" aria-selected="true">
                                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Equipamento Nacional</span>
                             </a>
-                            <a class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                            <a class="nav-link" id="e_importado-tab" data-bs-toggle="pill" href="#e_importado" role="tab" aria-controls="e_importado" aria-selected="false">
                                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Equipamento Importado</span>
                             </a>
@@ -389,11 +394,17 @@ if (isset($_GET['id_projeto'])) {
 
                     <div class="col-sm-9">
                         <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                <p class="mb-0">...</p>
+                            <div class="tab-pane fade active show" id="e_nacional" role="tabpanel" aria-labelledby="e_nacional-tab">
+
+
+
+
                             </div>
-                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                <p class="mb-0">...</p>
+                            <div class="tab-pane fade" id="e_importado" role="tabpanel" aria-labelledby="e_importado-tab">
+
+
+
+
                             </div>
 
                         </div> <!-- end tab-content-->
@@ -602,6 +613,7 @@ if (isset($_GET['id_projeto'])) {
 
         <script>
             $(document).ready(function() {
+                updateTable_patente()
                 $('#form_patente').submit(function(e) {
                     e.preventDefault();
                     var formData = $(this).serialize();
@@ -617,7 +629,7 @@ if (isset($_GET['id_projeto'])) {
                                 confirmButtonText: 'OK'
                             }).then(function() {
                                 // Chama a função updateTable() após o usuário fechar o SweetAlert2
-                                updateTable();
+                                updateTable_patente();
                             });
                             // Limpar o formulário após o sucesso
                             $('#form_patente')[0].reset();
@@ -634,6 +646,23 @@ if (isset($_GET['id_projeto'])) {
                     });
                 });
             });
+
+            function updateTable_patente() {
+                // Obter o ID do projeto
+                var id_projeto = $('#projeto_id').val();
+                // Fazer uma solicitação AJAX para buscar os dados atualizados do projeto
+                $.ajax({
+                    type: 'GET',
+                    url: 'forms/list/list_patente.php?id_projeto=' + id_projeto,
+                    success: function(response) {
+                        // Atualizar a tabela com os novos dados
+                        $('#tabela_projetos_patentes').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao buscar dados do projeto:', error);
+                    }
+                });
+            }
         </script>
 
 

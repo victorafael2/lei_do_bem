@@ -112,7 +112,7 @@ if (mysqli_num_rows($resultado) > 0) {
             e.preventDefault();
             var projectId = $(this).data('project-id');
             // Redirecionar para a página de detalhes do projeto com o ID do projeto
-            window.location.href = 'index.php?id=4&id_projeto=' + projectId;
+            window.location.href = 'page.php?id=4&id_projeto=' + projectId;
         });
 
         // Evento de clique para editar o projeto

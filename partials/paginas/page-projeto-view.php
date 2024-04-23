@@ -396,14 +396,66 @@ if (isset($_GET['id_projeto'])) {
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade active show" id="e_nacional" role="tabpanel" aria-labelledby="e_nacional-tab">
 
+                            <form action="#" method="post" id="form_equipamento_nacional">
 
+                        <input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo $id_projeto ?>">
+
+                        <label for="example-select" class="form-label">Identificação do Equipamento</label>
+                        <input type="text" class="form-control" id="n_equipamento_nacional" name="n_equipamento_nacional">
+
+                        </input> <br>
+                        <label for="example-select" class="form-label">Nº Nota Fiscal</label>
+                        <input type="text" class="form-control" id="nota_fiscal_equipamento_nacional" name="nota_fiscal_equipamento_nacional">
+
+                        </input> <br>
+
+                        <label for="simpleinput" class="form-label">Valor</label>
+                        <input type="text" id="valor_equipamento_nacional" name="valor_equipamento_nacional" class="form-control" ><br>
+
+                        <label for="example-textarea" class="form-label">Especificação</label>
+                        <textarea class="form-control" id="especificacao_equipamento_nacional" name="especificacao_equipamento_nacional" rows="5"></textarea> <br>
+
+
+
+                        <input class="btn btn-success" id="btnSalvar" type="submit" value="Salvar">
+
+                    </form>
+
+                    <div id="tabela_projetos_equipamento_nacional">
+            </div>
 
 
                             </div>
                             <div class="tab-pane fade" id="e_importado" role="tabpanel" aria-labelledby="e_importado-tab">
 
 
+                            <form action="#" method="post" id="form_equipamento_internacional">
 
+<input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo $id_projeto ?>">
+
+<label for="example-select" class="form-label">Identificação do Equipamento</label>
+<input type="text" class="form-control" id="n_equipamento_internacional" name="n_equipamento_internacional">
+
+</input> <br>
+<label for="example-select" class="form-label">Nº Nota Fiscal</label>
+<input type="text" class="form-control" id="nota_fiscal_equipamento_internacional" name="nota_fiscal_equipamento_internacional">
+
+</input> <br>
+
+<label for="simpleinput" class="form-label">Valor</label>
+<input type="text" id="valor_equipamento_internacional" name="valor_equipamento_internacional" class="form-control" ><br>
+
+<label for="example-textarea" class="form-label">Especificação</label>
+<textarea class="form-control" id="especificacao_equipamento_internacional" name="especificacao_equipamento_internacional" rows="5"></textarea> <br>
+
+
+
+<input class="btn btn-success" id="btnSalvar" type="submit" value="Salvar">
+
+</form>
+
+<div id="tabela_projetos_equipamento_internacional">
+</div>
 
                             </div>
 
@@ -712,6 +764,211 @@ if (isset($_GET['id_projeto'])) {
                     success: function(response) {
                         // Atualizar a tabela com os novos dados
                         $('#tabela_projetos_financiamento').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao buscar dados do projeto:', error);
+                    }
+                });
+            }
+        </script>
+
+
+
+
+<script>
+    // Função para formatar números com separador de milhares e vírgula como separador decimal
+    function formatarNumero(numero) {
+        // Converte o número para uma string
+        var numeroString = numero.toString();
+        // Separa a parte inteira da parte decimal
+        var partes = numeroString.split('.');
+        var parteInteira = partes[0];
+        var parteDecimal = partes.length > 1 ? partes[1] : '';
+
+        // Adiciona o separador de milhares na parte inteira
+        parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        // Formata a parte decimal com duas casas decimais
+        parteDecimal = parteDecimal.length > 0 ? ',' + parteDecimal.padEnd(2, '0') : ',00';
+
+        // Retorna a concatenação da parte inteira com a parte decimal
+        return parteInteira + parteDecimal;
+    }
+
+    // Função para validar o campo de valor como decimal
+    function validarDecimal(input) {
+        // Remove todos os pontos de milhares para evitar erros de validação
+        input.value = input.value.replace(/\./g, '');
+        // Substitui vírgulas por pontos
+        input.value = input.value.replace(/,/g, '.');
+
+        // Verifica se o valor inserido é um número válido
+        if (isNaN(input.value)) {
+            // Se não for um número válido, limpa o campo
+            input.value = '';
+            // Exibe uma mensagem de erro
+            alert("Por favor, insira um valor numérico válido.");
+            return;
+        }
+
+        // Formata o valor inserido com separador de milhares e duas casas decimais
+        input.value = formatarNumero(parseFloat(input.value).toFixed(2));
+    }
+
+    // Adiciona um ouvinte de evento para chamar a função de validação quando o campo perder o foco
+    document.getElementById('valor_equipamento_nacional').addEventListener('blur', function() {
+        validarDecimal(this);
+    });
+</script>
+
+<script>
+            $(document).ready(function() {
+                updateTable_equipamento_nacional();
+                $('#form_equipamento_nacional').submit(function(e) {
+                    e.preventDefault();
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'forms/save/save_equipamento_nacional.php',
+                        data: formData,
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Sucesso!',
+                                text: 'O Equipamento foi salvo com sucesso.',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(function() {
+                                // Chama a função updateTable() após o usuário fechar o SweetAlert2
+                                updateTable_equipamento_nacional();
+                            });
+                            // Limpar o formulário após o sucesso
+                            $('#form_equipamento_nacional')[0].reset();
+                            // Não é necessário recarregar a página, pois já estamos atualizando a tabela
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: 'Ocorreu um erro ao atualizar o projeto.',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                });
+            });
+
+            function updateTable_equipamento_nacional() {
+                // Obter o ID do projeto
+                var id_projeto = $('#projeto_id').val();
+                // Fazer uma solicitação AJAX para buscar os dados atualizados do projeto
+                $.ajax({
+                    type: 'GET',
+                    url: 'forms/list/list_equipamentos_nacionais.php?id_projeto=' + id_projeto,
+                    success: function(response) {
+                        // Atualizar a tabela com os novos dados
+                        $('#tabela_projetos_equipamento_nacional').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao buscar dados do projeto:', error);
+                    }
+                });
+            }
+        </script>
+
+
+
+<script>
+    // Função para formatar números com separador de milhares e vírgula como separador decimal
+    function formatarNumero(numero) {
+        // Converte o número para uma string
+        var numeroString = numero.toString();
+        // Separa a parte inteira da parte decimal
+        var partes = numeroString.split('.');
+        var parteInteira = partes[0];
+        var parteDecimal = partes.length > 1 ? partes[1] : '';
+
+        // Adiciona o separador de milhares na parte inteira
+        parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        // Formata a parte decimal com duas casas decimais
+        parteDecimal = parteDecimal.length > 0 ? ',' + parteDecimal.padEnd(2, '0') : ',00';
+
+        // Retorna a concatenação da parte inteira com a parte decimal
+        return parteInteira + parteDecimal;
+    }
+
+    // Função para validar o campo de valor como decimal
+    function validarDecimal(input) {
+        // Remove todos os pontos de milhares para evitar erros de validação
+        input.value = input.value.replace(/\./g, '');
+        // Substitui vírgulas por pontos
+        input.value = input.value.replace(/,/g, '.');
+
+        // Verifica se o valor inserido é um número válido
+        if (isNaN(input.value)) {
+            // Se não for um número válido, limpa o campo
+            input.value = '';
+            // Exibe uma mensagem de erro
+            alert("Por favor, insira um valor numérico válido.");
+            return;
+        }
+
+        // Formata o valor inserido com separador de milhares e duas casas decimais
+        input.value = formatarNumero(parseFloat(input.value).toFixed(2));
+    }
+
+    // Adiciona um ouvinte de evento para chamar a função de validação quando o campo perder o foco
+    document.getElementById('valor_equipamento_internacional').addEventListener('blur', function() {
+        validarDecimal(this);
+    });
+</script>
+
+<script>
+            $(document).ready(function() {
+                updateTable_equipamento_internacional();
+                $('#form_equipamento_internacional').submit(function(e) {
+                    e.preventDefault();
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'forms/save/save_equipamento_internacional.php',
+                        data: formData,
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Sucesso!',
+                                text: 'O Equipamento foi salvo com sucesso.',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(function() {
+                                // Chama a função updateTable() após o usuário fechar o SweetAlert2
+                                updateTable_equipamento_internacional();
+                            });
+                            // Limpar o formulário após o sucesso
+                            $('#form_equipamento_internacional')[0].reset();
+                            // Não é necessário recarregar a página, pois já estamos atualizando a tabela
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: 'Ocorreu um erro ao atualizar o projeto.',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                });
+            });
+
+            function updateTable_equipamento_internacional() {
+                // Obter o ID do projeto
+                var id_projeto = $('#projeto_id').val();
+                // Fazer uma solicitação AJAX para buscar os dados atualizados do projeto
+                $.ajax({
+                    type: 'GET',
+                    url: 'forms/list/list_equipamentos_internacionais.php?id_projeto=' + id_projeto,
+                    success: function(response) {
+                        // Atualizar a tabela com os novos dados
+                        $('#tabela_projetos_equipamento_internacional').html(response);
                     },
                     error: function(xhr, status, error) {
                         console.error('Erro ao buscar dados do projeto:', error);

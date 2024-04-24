@@ -266,7 +266,7 @@ if (isset($_GET['id_projeto'])) {
                         $resultado = mysqli_query($conn, $sql);
 
                         // Verifica se há resultados
-                        if (mysqli_num_rows($resultado) > 0) {
+                        if (mysqli_num_rows($resultado) >= 0) {
                             $projeto_propriedade = mysqli_fetch_assoc($resultado);
                             // Preencha os campos do formulário com os detalhes do projeto
 
@@ -274,36 +274,33 @@ if (isset($_GET['id_projeto'])) {
                     ?>
 
 
-                            <form action="#" method="post" id="form_patente">
+<form action="#" method="post" id="form_patente">
 
-                                <input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo $id_projeto ?>">
+<input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo isset($id_projeto) ? $id_projeto : ''; ?>">
 
-                                <label class="form-label" for="propriedade_intelectual">Decorrente da utilização dos incentivos, a
-                                    empresa obteve concessão de patente, registro de cultivar ou outros direitos de propriedade
-                                    intelectual em escritório de patentes no Brasil ou exterior ou está pleiteando?</label><br>
-                                <select class="form-select" id="propriedade_intelectual" name="propriedade_intelectual">
-                                    <option value="nao" <?php if ($projeto_propriedade['propriedade_intelectual'] == 'nao') echo 'selected'; ?>>Não
-                                    </option>
-                                    <option value="sim" <?php if ($projeto_propriedade['propriedade_intelectual'] == 'sim') echo 'selected'; ?>>Sim
-                                    </option>
-                                </select><br><br>
+<label class="form-label" for="propriedade_intelectual">Decorrente da utilização dos incentivos, a empresa obteve concessão de patente, registro de cultivar ou outros direitos de propriedade intelectual em escritório de patentes no Brasil ou exterior ou está pleiteando?</label><br>
+<select class="form-select" id="propriedade_intelectual" name="propriedade_intelectual">
+    <option value="" <?php if (!isset($projeto_propriedade['propriedade_intelectual'])) echo 'selected'; ?>>Escolha uma opção</option>
+    <option value="nao" <?php if (isset($projeto_propriedade['propriedade_intelectual']) && $projeto_propriedade['propriedade_intelectual'] == 'nao') echo 'selected'; ?>>Não</option>
+    <option value="sim" <?php if (isset($projeto_propriedade['propriedade_intelectual']) && $projeto_propriedade['propriedade_intelectual'] == 'sim') echo 'selected'; ?>>Sim</option>
+</select><br><br>
 
-                                <label for="gastos">Gastos destinados ao registro e à manutenção de marcas, patentes e cultivares, ainda
-                                    que pagos no exterior:</label><br>
-                                <textarea id="gastos" name="gastos" cols="50" class="form-control" id="example-textarea" rows="5"><?php echo $projeto_propriedade['gastos']; ?></textarea><br><br>
+<label for="gastos">Gastos destinados ao registro e à manutenção de marcas, patentes e cultivares, ainda que pagos no exterior:</label><br>
+<textarea id="gastos" name="gastos" cols="50" class="form-control" id="example-textarea" rows="5"><?php echo isset($projeto_propriedade['gastos']) ? $projeto_propriedade['gastos'] : ''; ?></textarea><br><br>
 
-                                <label for="simpleinput" class="form-label">Valor</label>
-                                <input type="text" id="valor" name="valor" class="form-control" value="<?php echo $projeto_propriedade['valor']; ?>"><br><br>
+<label for="simpleinput" class="form-label">Valor</label>
+<input type="text" id="valor" name="valor" class="form-control" value="<?php echo isset($projeto_propriedade['valor']) ? $projeto_propriedade['valor'] : ''; ?>"><br><br>
 
-                                <input class="btn btn-success" id="btnSalvar" type="submit" value="Enviar">
+<input class="btn btn-success" id="btnSalvar" type="submit" value="Enviar">
 
-                            </form>
+</form>
+
 
 
 
                             <div id="tabela_projetos_patentes">
             </div>
-                </div>
+
 
         <?php
                         } else {
@@ -314,57 +311,57 @@ if (isset($_GET['id_projeto'])) {
                     }
         ?>
 
-
+</div>
 
 
         <div class="tab-pane " id="settings-b3">
 
 
-            <?php
-            // Supondo que você já tenha uma conexão com o banco de dados estabelecida
+        <?php
+// Supondo que você já tenha uma conexão com o banco de dados estabelecida
 
-            // Verifica se o ID do projeto foi fornecido na URL
-            if (isset($_GET['id_projeto'])) {
-                $id_projeto = $_GET['id_projeto'];
+// Verifica se o ID do projeto foi fornecido na URL
+if (isset($_GET['id_projeto'])) {
+    $id_projeto = $_GET['id_projeto'];
 
-                // Consulta para buscar os detalhes do projeto com base no ID fornecido
-                $sql = "SELECT * FROM financiamento WHERE projeto_id = $id_projeto AND id = (SELECT MAX(id) FROM financiamento  WHERE projeto_id = $id_projeto)";
-                $resultado = mysqli_query($conn, $sql);
+    // Consulta para buscar os detalhes do projeto com base no ID fornecido
+    $sql = "SELECT * FROM financiamento WHERE projeto_id = $id_projeto AND id = (SELECT MAX(id) FROM financiamento  WHERE projeto_id = $id_projeto)";
+    $resultado = mysqli_query($conn, $sql);
 
-                // Verifica se há resultados
-                if (mysqli_num_rows($resultado) >= 0) {
-                    $projeto_financiamento = mysqli_fetch_assoc($resultado);
-                    // Preencha os campos do formulário com os detalhes do projeto
+    // Verifica se há resultados
+    if (mysqli_num_rows($resultado) >= 0) {
+        $projeto_financiamento = mysqli_fetch_assoc($resultado);
+        // Preencha os campos do formulário com os detalhes do projeto
+?>
+        <form action="#" method="post" id="form_financiamento">
 
+            <input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo isset($id_projeto) ? $id_projeto : ''; ?>">
 
-            ?>
-                    <form action="#" method="post" id="form_financiamento">
+            <label for="example-select" class="form-label">Financiamento</label>
+            <select class="form-select" id="financiamento" name="financiamento">
+                <option value="">Escolha uma opção</option>
+                <option value="Finep" <?php if (isset($projeto_financiamento['financiamento']) && $projeto_financiamento['financiamento'] == 'Finep') echo 'selected'; ?>>Finep</option>
+                <option value="FAP" <?php if (isset($projeto_financiamento['financiamento']) && $projeto_financiamento['financiamento'] == 'FAP') echo 'selected'; ?>>FAP</option>
+                <option value="BNDES" <?php if (isset($projeto_financiamento['financiamento']) && $projeto_financiamento['financiamento'] == 'BNDES') echo 'selected'; ?>>BNDES</option>
+                <option value="BNB" <?php if (isset($projeto_financiamento['financiamento']) && $projeto_financiamento['financiamento'] == 'BNB') echo 'selected'; ?>>BNB</option>
+            </select> <br><br>
 
-                        <input class="form-control d-none" type="text" id="projeto_id" name="projeto_id" required value="<?php echo $id_projeto ?>">
+            <label for="simpleinput" class="form-label">Valor</label>
+            <input type="text" id="valor" name="valor" class="form-control" value="<?php echo isset($projeto_financiamento['valor']) ? $projeto_financiamento['valor'] : ''; ?>"><br><br>
 
-                        <label for="example-select" class="form-label">Financiamento</label>
-                        <select class="form-select" id="financiamento" name="financiamento">
-                            <option value="Finep">Finep</option>
-                            <option value="FAP">FAP</option>
-                            <option value="BNDES">BNDES</option>
-                            <option value="BNB">BNB</option>
-                        </select> <br><br>
+            <input class="btn btn-success" id="btnSalvar" type="submit" value="Enviar">
 
-                        <label for="simpleinput" class="form-label">Valor</label>
-                        <input type="text" id="valor" name="valor" class="form-control" value="<?php echo $projeto_financiamento['valor']; ?>"><br><br>
+        </form>
 
-                        <input class="btn btn-success" id="btnSalvar" type="submit" value="Enviar">
+<?php
+    } else {
+        echo "Projeto não encontrado.";
+    }
+} else {
+    echo "ID do projeto não fornecido.";
+}
+?>
 
-                    </form>
-
-            <?php
-                } else {
-                    echo "Projeto não encontrado.";
-                }
-            } else {
-                echo "ID do projeto não fornecido.";
-            }
-            ?>
 
 
             <div id="tabela_projetos_financiamento">

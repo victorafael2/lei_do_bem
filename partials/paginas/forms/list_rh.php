@@ -5,7 +5,7 @@ $id_projeto = $_POST['id_projeto'];
 // Inclua o arquivo de conexão com o banco de dados aqui, se necessário
 
 // Consulta SQL para recuperar os dados da tabela "projetos"
-$sql = "SELECT cpf, nome, titulacao, total_horas, dedicacao, horas_dedicadas, mes, salario_encargos, projeto_id FROM rh where projeto_id = $id_projeto";
+$sql = "SELECT id,cpf, nome, titulacao, total_horas, dedicacao, horas_dedicadas, mes, salario_encargos, projeto_id FROM rh where projeto_id = $id_projeto";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

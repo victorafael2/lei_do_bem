@@ -11,15 +11,17 @@ $horas_dedicadas = mysqli_real_escape_string($conn, $_POST['horas_dedicadas']);
 $mes = mysqli_real_escape_string($conn, $_POST['mes']);
 $salario_encargos = mysqli_real_escape_string($conn, $_POST['salario_encargos']);
 $projeto_id = mysqli_real_escape_string($conn, $_POST['projeto_id']);
-
-
+$cargo = mysqli_real_escape_string($conn, $_POST['cargo']);
+$funcao = mysqli_real_escape_string($conn, $_POST['funcao']);
+$funcionario_novo = mysqli_real_escape_string($conn, $_POST['funcionario_novo']);
+$dt_contratacao = mysqli_real_escape_string($conn, $_POST['dt_contratacao']);
 
 // Preparar e executar a consulta SQL para inserir os dados
 // Prepara e executa a consulta SQL para inserir os dados na tabela usando instruções preparadas
-$sql = "INSERT INTO rh (cpf, nome, titulacao, total_horas, dedicacao, horas_dedicadas, mes, salario_encargos, projeto_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO rh (cpf, nome, titulacao, total_horas, dedicacao, horas_dedicadas, mes, salario_encargos, projeto_id,cargo,funcao,funcionario_novo,dt_contratacao)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssissi", $cpf, $nome, $titulacao, $total_horas, $dedicacao, $horas_dedicadas, $mes, $salario_encargos, $projeto_id);
+$stmt->bind_param("ssssssssissss", $cpf, $nome, $titulacao, $total_horas, $dedicacao, $horas_dedicadas, $mes, $salario_encargos, $projeto_id, $cargo, $funcao, $funcionario_novo, $dt_contratacao);
 
 if ($stmt->execute()) {
     echo "Dados inseridos com sucesso!";

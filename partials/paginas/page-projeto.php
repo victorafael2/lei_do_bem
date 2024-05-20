@@ -54,8 +54,17 @@ $conn->close();
 
 
 
-        <label for="ano_base">Ano Base:</label><br>
-        <input class="form-control" type="month" id="ano_mes_base" name="ano_mes_base" ><br>
+<label for="ano_base">Ano Base:</label><br>
+<select class="form-control" id="ano_mes_base" name="ano_mes_base">
+    <option value="">Selecione o ano</option>
+    <?php
+        $ano_atual = date("Y");
+        for ($ano = $ano_atual; $ano >= $ano_atual - 20; $ano--) {
+            echo "<option value='$ano'>$ano</option>";
+        }
+    ?>
+</select><br>
+
 
         <label for="nome_projeto">Nome do Projeto:</label><br>
         <input class="form-control"  type="text" id="nome_projeto" name="nome_projeto"><br>

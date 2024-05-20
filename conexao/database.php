@@ -1,6 +1,6 @@
 <?php
 
-    Seleciona as configurações do banco de dados com base no ambiente
+    // Seleciona as configurações do banco de dados com base no ambiente
 
     if ($_SERVER['SERVER_NAME'] === 'localhost') {
         $servername = "localhost";

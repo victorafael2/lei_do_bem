@@ -1,283 +1,900 @@
-  <p>
-                                <button class="btn btn-soft-success" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseWidthExample" aria-expanded="false"
-                                    aria-controls="collapseWidthExample">
-                                    Adicionar Colaborador
-                                </button>
-                            </p>
+<p>
+  <button
+    class="btn btn-soft-success"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapseWidthExample"
+    aria-expanded="false"
+    aria-controls="collapseWidthExample"
+  >
+    Adicionar Colaborador
+  </button>
+</p>
 
-                            <div>
-                                <div class="collapse " id="collapseWidthExample">
-                                    <div class="card card-body mb-0">
+<div>
+  <div class="collapse" id="collapseWidthExample">
+    <div class="card card-body mb-0">
+      <form id="rh_form">
+        <div class="form-group row mb-2">
+          <input
+            class="form-control d-none"
+            type="text"
+            id="projeto_id"
+            name="projeto_id"
+            required
+            value="<?php echo $id_projeto?>"
+          />
+          <label for="cpf" class="col-sm-2 col-form-label">CPF:</label>
+          <div class="col-sm-4">
+            <input
+              class="form-control"
+              type="text"
+              id="cpf"
+              name="cpf"
+              required
+            />
+          </div>
 
-                                        <form id="rh_form">
-                                            <div class="form-group row mb-2">
-                                                <input class="form-control d-none" type="text" id="projeto_id"
-                                                    name="projeto_id" required value="<?php echo $id_projeto?>">
-                                                <label for="cpf" class="col-sm-2 col-form-label">CPF:</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control" type="text" id="cpf" name="cpf"
-                                                        required>
-                                                </div>
+          <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+          <div class="col-sm-4">
+            <input
+              class="form-control"
+              type="text"
+              id="nome"
+              name="nome"
+              required
+            />
+          </div>
+        </div>
 
-                                                <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control" type="text" id="nome" name="nome"
-                                                        required>
-                                                </div>
-                                            </div>
+        <div class="form-group row mb-2">
+          <label for="titulacao" class="col-sm-2 col-form-label"
+            >Titulação:</label
+          >
+          <div class="col-sm-4">
+            <select
+              class="form-control"
+              id="titulacao"
+              name="titulacao"
+              required
+            >
+              <option value="">Selecione...</option>
+              <option value="Tecnólogo">Tecnólogo</option>
+              <option value="Técnico de Nível Médio">
+                Técnico de Nível Médio
+              </option>
+              <option value="Graduado">Graduado</option>
+              <option value="Pós Graduado">Pós Graduado</option>
+              <option value="Mestre">Mestre</option>
+              <option value="Doutor">Doutor</option>
+            </select>
+          </div>
 
-                                            <div class="form-group row mb-2">
-                                                <label for="titulacao"
-                                                    class="col-sm-2 col-form-label">Titulação:</label>
-                                                <div class="col-sm-4">
-                                                    <select class="form-control" id="titulacao" name="titulacao"
-                                                        required>
-                                                        <option value="">Selecione...</option>
-                                                        <option value="Tecnólogo">Tecnólogo</option>
-                                                        <option value="Técnico de Nível Médio">Técnico de Nível Médio
-                                                        </option>
-                                                        <option value="Graduado">Graduado</option>
-                                                        <option value="Pós Graduado">Pós Graduado</option>
-                                                        <option value="Mestre">Mestre</option>
-                                                        <option value="Doutor">Doutor</option>
-                                                    </select>
-                                                </div>
+          <label for="total_horas" class="col-sm-2 col-form-label"
+            >Total de Horas - mês:</label
+          >
+          <div class="col-sm-4">
+            <input
+              type="text"
+              class="form-control"
+              id="total_horas"
+              name="total_horas"
+              placeholder="hhh:mm"
+              pattern="([0-9]{1,3}):[0-5][0-9]"
+              title="Por favor, insira um horário válido no formato HHH:MM"
+              required
+            />
+          </div>
+        </div>
 
-                                                <label for="total_horas" class="col-sm-2 col-form-label">Total de Horas
-                                                    -
-                                                    mês:</label>
-                                                <div class="col-sm-4">
+        <div class="form-group row mb-2">
+          <label for="dedicacao" class="col-sm-2 col-form-label"
+            >Dedicação:</label
+          >
+          <div class="col-sm-4">
+            <select
+              class="form-control"
+              id="dedicacao"
+              name="dedicacao"
+              placeholder="hhh:mm"
+              pattern="([0-9]{1,3}):[0-5][0-9]"
+              title="Por favor, insira um horário válido no formato HHH:MM"
+              required
+            >
+              <option value="">Selecione...</option>
+              <option value="Exclusiva">Exclusiva</option>
+              <option value="Parcial">Parcial</option>
+            </select>
+          </div>
 
-                                                    <input type="text" class="form-control" id="total_horas"
-                                                        name="total_horas" placeholder="hh:mm" required>
+          <label for="horas_dedicadas" class="col-sm-2 col-form-label"
+            >Horas Dedicadas:</label
+          >
+          <div class="col-sm-4">
+            <input
+              type="text"
+              class="form-control"
+              id="horas_dedicadas"
+              name="horas_dedicadas"
+              placeholder="hhh:mm"
+              pattern="([0-9]{1,3}):[0-5][0-9]"
+              title="Por favor, insira um horário válido no formato HHH:MM"
+              required
+            />
+          </div>
+        </div>
 
-                                                </div>
-                                            </div>
+        <div class="form-group row mb-2">
+          <label for="mes" class="col-sm-2 col-form-label">Mês:</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="mes" name="mes" required>
+              <option value="">Selecione...</option>
+              <option value="Janeiro">Janeiro</option>
+              <option value="Fevereiro">Fevereiro</option>
+              <option value="Março">Março</option>
+              <option value="Abril">Abril</option>
+              <option value="Maio">Maio</option>
+              <option value="Junho">Junho</option>
+              <option value="Julho">Julho</option>
+              <option value="Agosto">Agosto</option>
+              <option value="Setembro">Setembro</option>
+              <option value="Outubro">Outubro</option>
+              <option value="Novembro">Novembro</option>
+              <option value="Dezembro">Dezembro</option>
+            </select>
+          </div>
 
-                                            <div class="form-group row mb-2">
-                                                <label for="dedicacao"
-                                                    class="col-sm-2 col-form-label">Dedicação:</label>
-                                                <div class="col-sm-4">
-                                                    <select class="form-control" id="dedicacao" name="dedicacao"
-                                                        required>
-                                                        <option value="">Selecione...</option>
-                                                        <option value="Exclusiva">Exclusiva</option>
-                                                        <option value="Parcial">Parcial</option>
-                                                    </select>
-                                                </div>
+          <label for="salario_encargos" class="col-sm-2 col-form-label"
+            >Salário + encargos (filtro para os meses do ano):</label
+          >
+          <div class="col-sm-4">
+            <input
+              class="form-control"
+              type="text"
+              id="salario_encargos"
+              name="salario_encargos"
+              required
+              oninput="formatCurrency(this)"
+            />
+          </div>
+        </div>
 
-                                                <label for="horas_dedicadas" class="col-sm-2 col-form-label">Horas
-                                                    Dedicadas:</label>
-                                                <div class="col-sm-4">
+        <div class="form-group row mb-2">
+          <label for="cargo" class="col-sm-2 col-form-label">Cargo:</label>
+          <div class="col-sm-4">
+            <input
+              class="form-control"
+              type="text"
+              id="cargo"
+              name="cargo"
+              required
+            />
+          </div>
 
-                                                    <input type="text" class="form-control" id="horas_dedicadas"
-                                                        name="horas_dedicadas" placeholder="hh:mm" required>
-                                                </div>
-                                            </div>
+          <label for="funcao" class="col-sm-2 col-form-label">Função:</label>
+          <div class="col-sm-4">
+            <input
+              class="form-control"
+              type="text"
+              id="funcao"
+              name="funcao"
+              required
+            />
+          </div>
+        </div>
 
-                                            <div class="form-group row mb-2">
-                                                <label for="mes" class="col-sm-2 col-form-label">Mês:</label>
-                                                <div class="col-sm-4">
-                                                    <select class="form-control" id="mes" name="mes" required>
-                                                        <option value="">Selecione...</option>
-                                                        <option value="Janeiro">Janeiro</option>
-                                                        <option value="Fevereiro">Fevereiro</option>
-                                                        <option value="Março">Março</option>
-                                                        <option value="Abril">Abril</option>
-                                                        <option value="Maio">Maio</option>
-                                                        <option value="Junho">Junho</option>
-                                                        <option value="Julho">Julho</option>
-                                                        <option value="Agosto">Agosto</option>
-                                                        <option value="Setembro">Setembro</option>
-                                                        <option value="Outubro">Outubro</option>
-                                                        <option value="Novembro">Novembro</option>
-                                                        <option value="Dezembro">Dezembro</option>
-                                                    </select>
-                                                </div>
+        <div class="form-group row mb-2">
+          <label for="funcionario_novo" class="col-sm-2 col-form-label"
+            >Funcionário Novo:</label
+          >
+          <div class="col-sm-4">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="funcionario_novo"
+                name="funcionario_novo"
+                value="novo"
+                required
+              />
+              <label class="form-check-label" for="funcionario_novo"
+                >Novo</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="funcionario_desligado"
+                name="funcionario_novo"
+                value="desligado"
+              />
+              <label class="form-check-label" for="funcionario_desligado"
+                >Desligado</label
+              >
+            </div>
+          </div>
 
-                                                <label for="salario_encargos" class="col-sm-2 col-form-label">Salário +
-                                                    encargos
-                                                    (filtro para os meses do ano):</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control" type="text" id="salario_encargos"
-                                                        name="salario_encargos" required>
-                                                </div>
-                                            </div>
+          <label for="dt_contratacao" class="col-sm-2 col-form-label"
+            >Data da Contratação:</label
+          >
+          <div class="col-sm-4">
+            <input
+              class="form-control"
+              type="date"
+              id="dt_contratacao"
+              name="dt_contratacao"
+              required
+            />
+          </div>
+        </div>
 
-                                            <div class="form-group row mb-2">
+        <div class="form-group row mt-2">
+          <div class="col-sm-10 offset-sm-2">
+            <input class="btn btn-success" type="submit" value="Salvar" />
+            <input class="btn btn-info" type="reset" value="Limpar" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-                                                <label for="cargo" class="col-sm-2 col-form-label">Cargo:</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control" type="text" id="cargo" name="cargo"
-                                                        required>
-                                                </div>
+<!-- Modal de Edição -->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-full-width" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar Registro</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-hidden="true"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="rh_form_edit">
+          <div class="form-group row mb-2">
+            <input
+              class="form-control d-none"
+              type="text"
+              id="projeto_id"
+              name="projeto_id"
+              required
+              value="<?php echo $id_projeto?>"
+            />
+            <input
+              class="form-control d-none"
+              type="text"
+              id="projeto_id_id"
+              name="projeto_id_id"
+              required
 
-                                                <label for="funcao" class="col-sm-2 col-form-label">Função:</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control" type="text" id="funcao" name="funcao"
-                                                        required>
-                                                </div>
+            />
+            <label for="cpfField" class="col-sm-2 col-form-label">CPF:</label>
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                type="text"
+                id="cpfField"
+                name="cpfField"
+                required
+              />
+            </div>
+
+            <label for="nomeField" class="col-sm-2 col-form-label">Nome:</label>
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                type="text"
+                id="nomeField"
+                name="nomeField"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label for="titulacaoField" class="col-sm-2 col-form-label"
+              >Titulação:</label
+            >
+            <div class="col-sm-4">
+              <select
+                class="form-control"
+                id="titulacaoField"
+                name="titulacaoField"
+                required
+              >
+                <option value="">Selecione...</option>
+
+                <option value="Tecnólogo">Tecnólogo</option>
+                <option value="Técnico de Nível Médio">
+                  Técnico de Nível Médio
+                </option>
+                <option value="Graduado">Graduado</option>
+                <option value="Pós Graduado">Pós Graduado</option>
+                <option value="Mestre">Mestre</option>
+                <option value="Doutor">Doutor</option>
+              </select>
+            </div>
+
+            <label for="totalHorasField" class="col-sm-2 col-form-label"
+              >Total de Horas - mês:</label
+            >
+            <div class="col-sm-4">
+              <input
+                type="text"
+                class="form-control"
+                id="totalHorasField"
+                name="totalHorasField"
+                placeholder="hhh:mm"
+              pattern="([0-9]{1,3}):[0-5][0-9]"
+              title="Por favor, insira um horário válido no formato HHH:MM"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label for="dedicacaoField" class="col-sm-2 col-form-label"
+              >Dedicação:</label
+            >
+            <div class="col-sm-4">
+              <select
+                class="form-control"
+                id="dedicacaoField"
+                name="dedicacaoField"
+                required
+              >
+                <option value="">Selecione...</option>
+                <option value="Exclusiva">Exclusiva</option>
+                <option value="Parcial">Parcial</option>
+              </select>
+            </div>
+
+            <label for="horasDedicadasField" class="col-sm-2 col-form-label"
+              >Horas Dedicadas:</label
+            >
+            <div class="col-sm-4">
+              <input
+                type="text"
+                class="form-control"
+                id="horasDedicadasField"
+                name="horasDedicadasField"
+                placeholder="hhh:mm"
+              pattern="([0-9]{1,3}):[0-5][0-9]"
+              title="Por favor, insira um horário válido no formato HHH:MM"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label for="mesField" class="col-sm-2 col-form-label">Mês:</label>
+            <div class="col-sm-4">
+              <select
+                class="form-control"
+                id="mesField"
+                name="mesField"
+                required
+              >
+                <option value="">Selecione...</option>
+                <option value="Janeiro">Janeiro</option>
+                <option value="Fevereiro">Fevereiro</option>
+                <option value="Março">Março</option>
+                <option value="Abril">Abril</option>
+                <option value="Maio">Maio</option>
+                <option value="Junho">Junho</option>
+                <option value="Julho">Julho</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Setembro">Setembro</option>
+                <option value="Outubro">Outubro</option>
+                <option value="Novembro">Novembro</option>
+                <option value="Dezembro">Dezembro</option>
+              </select>
+            </div>
+
+            <label for="salarioEncargosField" class="col-sm-2 col-form-label"
+              >Salário + encargos (filtro para os meses do ano):</label
+            >
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                type="text"
+                id="salarioEncargosField"
+                name="salarioEncargosField"
+                required
+                oninput="formatCurrency(this)"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label for="cargoField" class="col-sm-2 col-form-label"
+              >Cargo:</label
+            >
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                type="text"
+                id="cargoField"
+                name="cargoField"
+                required
+              />
+            </div>
+
+            <label for="funcaoField" class="col-sm-2 col-form-label"
+              >Função:</label
+            >
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                type="text"
+                id="funcaoField"
+                name="funcaoField"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label for="funcionario_novo" class="col-sm-2 col-form-label"
+              >Funcionário Novo:</label
+            >
+            <div class="col-sm-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="funcionario_novo_field"
+                  name="funcionario_novo_field"
+                  value="novo"
+                  required
+                />
+                <label class="form-check-label" for="funcionario_novo_field"
+                  >Novo</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="funcionario_desligado_field"
+                  name="funcionario_desligado_field"
+                  value="desligado"
+                />
+                <label
+                  class="form-check-label"
+                  for="funcionario_desligado_field"
+                  >Desligado</label
+                >
+              </div>
+            </div>
+
+            <label for="dt_contratacaoField" class="col-sm-2 col-form-label"
+              >Data da Contratação:</label
+            >
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                type="date"
+                id="dt_contratacaoField"
+                name="dt_contratacaoField"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- <div class="form-group row mt-2">
+            <div class="col-sm-10 offset-sm-2">
+              <input class="btn btn-success" type="submit" value="Salvar" />
+              <input class="btn btn-info" type="reset" value="Limpar" />
+            </div>
+          </div> -->
+
+      </div>
+      <div class="modal-footer">
 
 
-                                            </div>
-
-                                            <div class="form-group row mb-2">
-
-                                                <label for="funcionario_novo" class="col-sm-2 col-form-label">Funcionário Novo:</label>
-                                                <div class="col-sm-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" id="funcionario_novo" name="funcionario_novo" value="novo" required>
-                                                        <label class="form-check-label" for="funcionario_novo">Novo</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" id="funcionario_desligado" name="funcionario_novo" value="desligado">
-                                                        <label class="form-check-label" for="funcionario_desligado">Desligado</label>
-                                                    </div>
-                                                </div>
+          <input class="btn btn-primary" type="submit" value="Editar" />
 
 
 
-                                                <label for="dt_contratacao" class="col-sm-2 col-form-label">Data da Contratação:</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control" type="date" id="dt_contratacao" name="dt_contratacao"
-                                                        required>
-                                                </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function converterParaMinutos() {
+    var horasMensaisInput = document.getElementById("horasMensais").value;
+    var partes = horasMensaisInput.split(":");
+    var horas = parseInt(partes[0]);
+    var minutos = parseInt(partes[1]);
+
+    var totalMinutos = horas * 60 + minutos;
+
+    // Agora você pode usar 'totalMinutos' para seus cálculos
+    console.log("Total de minutos: " + totalMinutos);
+  }
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#rh_form").submit(function (e) {
+      e.preventDefault(); // Impede o envio padrão do formulário
+
+      var cpf = $("#cpf").val();
+      if (validarCPF(cpf)) {
+        // Se o CPF for válido, envia os dados via AJAX
+        $.ajax({
+          type: "POST",
+          url: "forms/save/save_rh_form.php", // URL para onde enviar os dados
+          data: $(this).serialize(), // Serializa os dados do formulário
+          success: function (response) {
+            // Exibe uma mensagem de sucesso
+            Swal.fire({
+              icon: "success",
+              title: "Sucesso!",
+              text: "Formulário salvo com sucesso.",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a lista de recursos humanos após o sucesso
+                $("#lista_recursos_humanos").load("forms/list_rh.php");
+              }
+            });
+            // Limpa os campos do formulário
+            $("#rh_form")[0].reset();
+          },
+          error: function (xhr, status, error) {
+            // Em caso de erro, exibe uma mensagem de erro
+            Swal.fire({
+              icon: "error",
+              title: "Erro!",
+              text: "Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.",
+            });
+          },
+        });
+      } else {
+        // Se o CPF for inválido, exibe uma mensagem de erro
+        Swal.fire({
+          icon: "error",
+          title: "CPF inválido!",
+          text: "Por favor, insira um CPF válido.",
+        });
+      }
+    });
+
+    // Aqui começa o código para o formulário de edição
+    $("#rh_form_edit").submit(function (e) {
+      e.preventDefault(); // Impede o envio padrão do formulário de edição
+      var cpf = $("#cpfField").val();
+      if (validarCPF(cpf)) {
+        // Se o CPF for válido, envia os dados via AJAX
+        $.ajax({
+          type: "POST",
+          url: "forms/save/save_rh_form.php", // URL para onde enviar os dados
+          data: $(this).serialize(), // Serializa os dados do formulário
+          success: function (response) {
+            // Exibe uma mensagem de sucesso
+            Swal.fire({
+              icon: "success",
+              title: "Sucesso!",
+              text: "Formulário salvo com sucesso.",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a lista de recursos humanos após o sucesso
+                $("#lista_recursos_humanos").load("forms/list_rh.php");
+              }
+            });
+            // Limpa os campos do formulário
+            // $("#rh_form")[0].reset();
+          },
+          error: function (xhr, status, error) {
+            // Em caso de erro, exibe uma mensagem de erro
+            Swal.fire({
+              icon: "error",
+              title: "Erro!",
+              text: "Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.",
+            });
+          },
+        });
+      } else {
+        // Se o CPF for inválido, exibe uma mensagem de erro
+        Swal.fire({
+          icon: "error",
+          title: "CPF inválido!",
+          text: "Por favor, insira um CPF válido.",
+        });
+      }
+    });
+
+    function validarCPF(cpf) {
+      cpf = cpf.replace(/[^\d]+/g, "");
+      if (cpf == "") return false;
+      // Elimina CPFs invalidos conhecidos
+      if (
+        cpf.length != 11 ||
+        cpf == "00000000000" ||
+        cpf == "11111111111" ||
+        cpf == "22222222222" ||
+        cpf == "33333333333" ||
+        cpf == "44444444444" ||
+        cpf == "55555555555" ||
+        cpf == "66666666666" ||
+        cpf == "77777777777" ||
+        cpf == "88888888888" ||
+        cpf == "99999999999"
+      )
+        return false;
+      // Valida 1o digito
+      add = 0;
+      for (i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
+      rev = 11 - (add % 11);
+      if (rev == 10 || rev == 11) rev = 0;
+      if (rev != parseInt(cpf.charAt(9))) return false;
+      // Valida 2o digito
+      add = 0;
+      for (i = 0; i < 10; i++) add += parseInt(cpf.charAt(i)) * (11 - i);
+      rev = 11 - (add % 11);
+      if (rev == 10 || rev == 11) rev = 0;
+      if (rev != parseInt(cpf.charAt(10))) return false;
+      return true;
+    }
+
+    document.getElementById("cpf").addEventListener("blur", function () {
+      var cpf = this.value;
+      if (!validarCPF(cpf)) {
+        Swal.fire({
+          icon: "error",
+          title: "CPF inválido!",
+          text: "Por favor, insira um CPF válido.",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.getElementById("cpf").value = "";
+            document.getElementById("cpf").focus();
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<script>
+  document.getElementById("cpf").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+    if (value.length > 11) value = value.slice(0, 11); // Limit to 11 digits
+
+    // Format the value
+    if (value.length > 9) {
+      value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    } else if (value.length > 6) {
+      value = value.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+    } else if (value.length > 3) {
+      value = value.replace(/(\d{3})(\d{3})/, "$1.$2");
+    }
+
+    e.target.value = value;
+  });
+</script>
+
+<script>
+  document.getElementById("cpfField").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+    if (value.length > 11) value = value.slice(0, 11); // Limit to 11 digits
+
+    // Format the value
+    if (value.length > 9) {
+      value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    } else if (value.length > 6) {
+      value = value.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+    } else if (value.length > 3) {
+      value = value.replace(/(\d{3})(\d{3})/, "$1.$2");
+    }
+
+    e.target.value = value;
+  });
+</script>
+
+<script>
+  function formatCurrency(input) {
+    let value = input.value;
+
+    // Remove tudo que não for número
+    value = value.replace(/\D/g, "");
+
+    // Formata para a moeda brasileira
+    value = (value / 100).toFixed(2) + "";
+    value = value.replace(".", ",");
+    value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+
+    // Define o valor formatado no campo de entrada
+    input.value = "R$ " + value;
+  }
+</script>
 
 
-                                            </div>
+<script>
+    $(document).ready(function() {
+        // Obtenha o valor do id_projeto da página atual
+        var id_projeto = <?php echo json_encode($id_projeto); ?>;
 
-                                            <div class="form-group row mt-2">
-                                                <div class="col-sm-10 offset-sm-2">
-                                                    <input class="btn btn-success" type="submit" value="Salvar">
-                                                    <input class="btn btn-info" type="reset" value="Limpar">
-                                                </div>
-                                            </div>
-                                        </form>
+        // Função para carregar e atualizar a tabela
+        function updateTable() {
+            $.ajax({
+                url: 'partials/paginas/forms/list_rh.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id_projeto: id_projeto
+                }, // Passa o valor do id_projeto via POST
+                success: function(data) {
+                    // Limpa a tabela antes de preencher com os novos dados
+                    $('table tbody').empty();
 
-                                    </div>
-                                </div>
-                            </div>
+                    // Funções auxiliares para conversão e cálculo de porcentagem de horas
+                        function convertToMinutes(hours) {
+                            let parts = hours.split(':');
+                            return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+                        }
+
+                        function calculatePercentage(total_horas, horas_dedicadas) {
+                            let totalMinutes = convertToMinutes(total_horas);
+                            let dedicatedMinutes = convertToMinutes(horas_dedicadas);
+                            if (totalMinutes === 0) return 0; // Avoid division by zero
+                            let percentage = (dedicatedMinutes / totalMinutes) * 100;
+                            return percentage;
+                        }
+
+                        function parseCurrency(value) {
+                            // Remove R$ symbol and convert to number
+                            return parseFloat(value.replace('R$', '').replace(/\./g, '').replace(',', '.'));
+                        }
+
+                        function formatCurrency(value) {
+                            // Format number to Brazilian currency format
+                            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }).replace('R$', 'R$ ');
+                        }
+
+
+                    // Preenche a tabela com os dados recebidos
+                    $.each(data, function(index, row) {
+
+                        // Calcular a porcentagem das horas
+                        let percentageResult = calculatePercentage(row.total_horas, row.horas_dedicadas);
+
+                        // Converter salario_encargos para número
+                        let salarioEncargosNumber = parseCurrency(row.salario_encargos);
+
+                        // Calcular o produto do percentual pelo salario_encargos apenas se a porcentagem for maior ou igual a 80%
+                        let productResult = percentageResult  >= 80 ? (percentageResult * salarioEncargosNumber / 100).toFixed(2) : '';
+
+                        // Formatar o resultado do produto para o formato de moeda brasileiro
+                        let formattedProductResult = productResult !== '' ? formatCurrency(parseFloat(productResult)) : '';
 
 
 
-                            <script>
-                                function converterParaMinutos() {
-                                    var horasMensaisInput = document.getElementById('horasMensais').value;
-                                    var partes = horasMensaisInput.split(':');
-                                    var horas = parseInt(partes[0]);
-                                    var minutos = parseInt(partes[1]);
+                        var newRow = $('<tr>' +
+                          '<td>' + row.mes + '</td>' +
+                          '<td>' + row.cpf + '</td>' +
+                          '<td>' + row.nome + '</td>' +
+                          '<td>' + row.titulacao + '</td>' +
+                          '<td>' + row.dedicacao + '</td>' +
+                          '<td>' + row.total_horas + '</td>' +
+                          '<td>' + row.horas_dedicadas + '</td>' +
 
-                                    var totalMinutos = horas * 60 + minutos;
-
-                                    // Agora você pode usar 'totalMinutos' para seus cálculos
-                                    console.log("Total de minutos: " + totalMinutos);
-                                }
-                                </script>
-
-                                <script>
-                                $(document).ready(function() {
+                          '<td>' + percentageResult.toFixed(2) + '%' + '</td>' + // Nova coluna com o resultado da porcentagem
+                          '<td>' + row.salario_encargos + '</td>' +
+                          '<td>' + formattedProductResult  + '</td>' + // Nova coluna com o produto se aplicável
 
 
+                            '<td><div class="btn-group" role="group">' +
+                            '<button type="button" class="btn btn-soft-info btn-sm editButton" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editar Registro"><i class="ri-edit-line"></i></button>' +
+                            '<button type="button" class="btn btn-soft-danger btn-sm deleteButton" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Apagar"><i class="ri-delete-bin-6-line"></i> </button>' +
+                            '</div></td>' +
+                            '</tr>');
+
+                        // Armazena o ID do registro como um atributo de dados nos botões
+                        newRow.find('.editButton').data('id', row.id);
+                        newRow.find('.deleteButton').data('id', row.id);
+
+                        // Adiciona a nova linha à tabela
+                        $('table tbody').append(newRow);
+
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        // Chame a função updateTable() quando a página carregar
+        updateTable();
+
+        // Adicione um evento de clique ao botão para atualizar a tabela
+        $('#updateButton').click(function() {
+            updateTable(); // Chama a função para atualizar a tabela
+        });
 
 
-                                    $('#rh_form').submit(function(e) {
-                                        e.preventDefault(); // Impede o envio padrão do formulário
+        // Evento de clique no botão de edição
+        $('table').on('click', '.editButton', function() {
+            var id = $(this).data('id');
+            // AJAX para obter os dados do registro com o ID selecionado
+            $.ajax({
+                url: 'forms/list/list_rh_id.php', // Substitua 'get_record.php' pelo seu script PHP para obter os dados do registro
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    // Preencher os campos do modal com os dados recebidos
+                    $('#projeto_id_id').val(data.id);
+                    $('#cpfField').val(data.cpf);
+                    $('#nomeField').val(data.nome);
+                    $('#titulacaoField').val(data.titulacao);
+                    $('#totalHorasField').val(data.total_horas);
+                    $('#dedicacaoField').val(data.dedicacao);
+                    $('#horasDedicadasField').val(data.horas_dedicadas);
+                    $('#mesField').val(data.mes);
+                    $('#salarioEncargosField').val(data.salario_encargos);
+                    $('#salarioEncargosField').val(data.salario_encargos);
+                    $('#cargoField').val(data.cargo);
+                    $('#funcaoField').val(data.funcao);
+                    $('#dt_contratacaoField').val(data.dt_contratacao);
 
-                                        var cpf = $('#cpf').val();
-                                        if (validarCPF(cpf)) {
-                                            // Se o CPF for válido, envia os dados via AJAX
-                                            $.ajax({
-                                                        type: 'POST',
-                                                        url: 'forms/save/save_rh_form.php', // URL para onde enviar os dados
-                                                        data: $(this).serialize(), // Serializa os dados do formulário
-                                                        success: function(response) {
-                                                            // Exibe uma mensagem de sucesso
-                                                            Swal.fire({
-                                                                icon: 'success',
-                                                                title: 'Sucesso!',
-                                                                text: 'Formulário salvo com sucesso.'
-                                                            }).then((result) => {
-                                                                if (result.isConfirmed) {
-                                                                    // Recarrega a lista de recursos humanos após o sucesso
-                                                                    $("#lista_recursos_humanos").load("forms/list_rh.php");
-                                                                }
-                                                            });
-                                                            // Limpa os campos do formulário
-                                                            $('#rh_form')[0].reset();
-                                                        },
-                                                error: function(xhr, status, error) {
-                                                    // Em caso de erro, exibe uma mensagem de erro
-                                                    Swal.fire({
-                                                        icon: 'error',
-                                                        title: 'Erro!',
-                                                        text: 'Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.'
-                                                    });
-                                                }
-                                            });
-                                        } else {
-                                            // Se o CPF for inválido, exibe uma mensagem de erro
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'CPF inválido!',
-                                                text: 'Por favor, insira um CPF válido.'
-                                            });
-                                        }
-                                    });
+                    // Preencher checkboxes
+                    if (data.funcionario_novo === "novo") {
+                        $('#funcionario_novo_field').prop('checked', true);
+                    } else if (data.funcionario_novo === "desligado") {
+                        $('#funcionario_desligado_field').prop('checked', true);
+                    }
 
-                                    function validarCPF(cpf) {
-                                        cpf = cpf.replace(/[^\d]+/g, '');
-                                        if (cpf == '') return false;
-                                        // Elimina CPFs invalidos conhecidos
-                                        if (cpf.length != 11 ||
-                                            cpf == "00000000000" ||
-                                            cpf == "11111111111" ||
-                                            cpf == "22222222222" ||
-                                            cpf == "33333333333" ||
-                                            cpf == "44444444444" ||
-                                            cpf == "55555555555" ||
-                                            cpf == "66666666666" ||
-                                            cpf == "77777777777" ||
-                                            cpf == "88888888888" ||
-                                            cpf == "99999999999")
-                                            return false;
-                                        // Valida 1o digito
-                                        add = 0;
-                                        for (i = 0; i < 9; i++)
-                                            add += parseInt(cpf.charAt(i)) * (10 - i);
-                                        rev = 11 - (add % 11);
-                                        if (rev == 10 || rev == 11)
-                                            rev = 0;
-                                        if (rev != parseInt(cpf.charAt(9)))
-                                            return false;
-                                        // Valida 2o digito
-                                        add = 0;
-                                        for (i = 0; i < 10; i++)
-                                            add += parseInt(cpf.charAt(i)) * (11 - i);
-                                        rev = 11 - (add % 11);
-                                        if (rev == 10 || rev == 11)
-                                            rev = 0;
-                                        if (rev != parseInt(cpf.charAt(10)))
-                                            return false;
-                                        return true;
-                                    }
+                    // Abrir o modal de edição
+                    $('#editModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
 
-                                    document.getElementById("cpf").addEventListener("blur", function() {
-                                        var cpf = this.value;
-                                        if (!validarCPF(cpf)) {
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'CPF inválido!',
-                                                text: 'Por favor, insira um CPF válido.',
-                                                confirmButtonColor: '#3085d6',
-                                                confirmButtonText: 'OK'
-                                            }).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    document.getElementById("cpf").value = "";
-                                                    document.getElementById("cpf").focus();
-                                                }
-                                            });
-                                        }
-                                    });
-                                });
-                                </script>
+        // Evento de clique no botão de exclusão
+        $('table').on('click', '.deleteButton', function() {
+            var id = $(this).data('id');
+
+            // Confirmar com o usuário se deseja excluir o registro
+            if (confirm("Tem certeza que deseja excluir este registro?")) {
+                // AJAX para excluir o registro do banco de dados
+                $.ajax({
+                    url: 'forms/delete/delete_rh.php', // Substitua 'delete_record.php' pelo seu script PHP para excluir o registro
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        // Atualizar a tabela após a exclusão
+                        updateTable();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>
+

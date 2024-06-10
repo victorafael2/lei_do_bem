@@ -66,6 +66,102 @@
 </div>
 </div>
 
+
+
+<!-- Modal de Edição -->
+<div
+  class="modal fade"
+  id="editModal_terc"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-full-width" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar Registro</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-hidden="true"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="terc_form_edit">
+
+            <div class="form-group row mb-2">
+                <input
+              class="form-control d-none"
+              type="text"
+              id="projeto_id"
+              name="projeto_id"
+              required
+              value="<?php echo $id_projeto?>"
+            />
+            <input
+              class="form-control d-none"
+              type="text"
+              id="projeto_id_id_terc"
+              name="projeto_id_id_terc"
+              required />
+
+                <label for="tipo" class="col-sm-2 col-form-label">Tipo:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="tipo_e" name="tipo_e" required>
+                        <option value="">Selecione...</option>
+                        <option value="universidade">Universidade</option>
+                        <option value="instituicao_pesquisa">Instituição de Pesquisa</option>
+                        <option value="inventor_independente">Inventor Independente</option>
+                        <option value="micro_empresa">Micro Empresa</option>
+                        <option value="empresa_pequeno_porte">Empresa de Pequeno Porte</option>
+                        <option value="apoio_tecnico">Serviço de Apoio Técnico</option>
+                        <option value="tecnologia_industrial">Tecnologia Industrial Básica</option>
+                        <option value="viagem">Viagem</option>
+                    </select>
+                </div>
+
+                <label for="situacao" class="col-sm-2 col-form-label">Situação:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="situacao_e" name="situacao_e" required>
+                        <option value="">Selecione...</option>
+                        <option value="cpf">CPF</option>
+                        <option value="cnpj">CNPJ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label for="cpf_cnpj" class="col-sm-2 col-form-label">CPF/CNPJ:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="cpf_cnpj_e" name="cpf_cnpj_e" required>
+                </div>
+
+                <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="nome_e" name="nome_e" required>
+                </div>
+            </div>
+
+            <!-- Restante do formulário mantido como no exemplo anterior -->
+
+
+
+      </div>
+      <div class="modal-footer">
+
+
+          <input class="btn btn-primary" type="submit" value="Editar" />
+
+
+
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
 <script>
     $(document).ready(function() {
     $('#terc_form').submit(function(event) {
@@ -148,6 +244,167 @@
 });
 
 </script>
+
+
+<script>
+$(document).ready(function() {
+    $('#terc_form_edit').submit(function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+
+
+        // Envia os dados do formulário via AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'forms/save/save_terc_form.php', // URL para onde enviar os dados
+            data: $('#terc_form').serialize(), // Serializa os dados do formulário
+            success: function(response) {
+                // Exibe uma mensagem de sucesso
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Formulário salvo com sucesso.',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+    // Recupera o ID do projeto do PHP
+    var projectId = <?php echo $id_projeto; ?>;
+
+    // Recarrega a lista após o sucesso com o ID do projeto
+    $("#list_terc").load("/paginas/forms/list_terc.php?id_projeto=" + projectId);
+}
+
+                });
+                // Limpa os campos do formulário
+                $('#terc_form')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                // Em caso de erro, exibe uma mensagem de erro
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao salvar o formulário. Por favor, tente novamente mais tarde.',
+                });
+            }
+        });
+    });
+
+
+});
+
+</script>
+
+
+
+<script>
+                $(document).ready(function() {
+                    // Obtenha o valor do id_projeto da página atual
+                    var id_projeto = <?php echo json_encode($id_projeto); ?>;
+
+                    // Função para carregar e atualizar a tabela
+                    function updateTable_terc() {
+                        // Seleciona a tabela com a id 'list_terc'
+                        var tabela = $('#list_terc');
+
+                        $.ajax({
+                            url: 'partials/paginas/forms/list_terc.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                id_projeto: id_projeto
+                            }, // Passa o valor do id_projeto via POST
+                            success: function(data) {
+                                // Limpa a tabela antes de preencher com os novos dados
+                                tabela.find('tbody').empty();
+
+                                // Preenche a tabela com os dados recebidos
+                                $.each(data, function(index, row) {
+                                    var newRow = $('<tr>' +
+                                        '<td>' + row.cpf_cnpj + '</td>' +
+                                        '<td>' + row.nome + '</td>' +
+                                        '<td>' + row.tipo + '</td>' +
+                                        '<td>' + row.situacao + '</td>' +
+                                        '<td><div class="btn-group" role="group">' +
+                            '<button type="button" class="btn btn-soft-info btn-sm editButton_terc" data-id="' + row.id + '" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editar Registro"><i class="ri-edit-line"></i></button>' +
+                            '<button type="button" class="btn btn-soft-danger btn-sm deleteButton_terc" data-id="' + row.id + '" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Apagar"><i class="ri-delete-bin-6-line"></i> </button>' +
+                            '</div></td>' +
+
+                                        '</tr>');
+
+
+
+                         // Adiciona a nova linha à tabela
+                         $('table tbody').append(newRow);
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    }
+
+                    // Chame a função updateTable() quando a página carregar
+                    updateTable_terc();
+
+                    // Adicione um evento de clique ao botão para atualizar a tabela
+                    $('#updateButton_terc').click(function() {
+                        updateTable_terc(); // Chama a função para atualizar a tabela
+                    });
+
+                    // Evento de clique no botão de edição
+        $('table').on('click', '.editButton_terc', function() {
+            var id = $(this).data('id');
+            // AJAX para obter os dados do registro com o ID selecionado
+            $.ajax({
+                url: 'forms/list/list_terc_id.php', // Substitua 'get_record.php' pelo seu script PHP para obter os dados do registro
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    // Preencher os campos do modal com os dados recebidos
+
+
+                    $('#projeto_id_id_terc').val(data.id);
+                    $('#tipo_e').val(data.tipo);
+                    $('#situacao_e').val(data.situacao);
+                    $('#cpf_cnpj_e').val(data.cpf_cnpj);
+                    $('#nome_e').val(data.nome);
+
+                    // Abrir o modal de edição
+                    $('#editModal_terc').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        // Evento de clique no botão de exclusão
+        $('table').on('click', '.deleteButton_terc', function() {
+            var id = $(this).data('id');
+
+            // Confirmar com o usuário se deseja excluir o registro
+            if (confirm("Tem certeza que deseja excluir este registro?")) {
+                // AJAX para excluir o registro do banco de dados
+                $.ajax({
+                    url: 'forms/delete/delete_terc.php', // Substitua 'delete_record.php' pelo seu script PHP para excluir o registro
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        // Atualizar a tabela após a exclusão
+                        updateTable();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+                });
+            </script>
 
 
 

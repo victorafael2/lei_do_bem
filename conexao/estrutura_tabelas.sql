@@ -13,8 +13,10 @@ CREATE TABLE `empresas` (
   `fiscal_incentives` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `login` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_user` timestamp NULL DEFAULT (now()),
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Estrutura da tabela 'equipamento_internacional'
 CREATE TABLE `equipamento_internacional` (
@@ -46,7 +48,7 @@ CREATE TABLE `financiamento` (
   `valor` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_insercao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Estrutura da tabela 'material'
 CREATE TABLE `material` (
@@ -101,7 +103,7 @@ CREATE TABLE `propriedade` (
   `valor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_insercao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Estrutura da tabela 'rh'
 CREATE TABLE `rh` (
@@ -113,11 +115,15 @@ CREATE TABLE `rh` (
   `dedicacao` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `horas_dedicadas` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mes` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salario_encargos` decimal(10,2) DEFAULT NULL,
+  `salario_encargos` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `projeto_id` int DEFAULT NULL,
   `data_envio` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `cargo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `funcao` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `funcionario_novo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dt_contratacao` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Estrutura da tabela 'terceiros'
 CREATE TABLE `terceiros` (
@@ -129,5 +135,5 @@ CREATE TABLE `terceiros` (
   `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_insercao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -522,53 +522,7 @@ if (isset($_GET['id_projeto'])) {
 
 
 
-            <script>
-                $(document).ready(function() {
-                    // Obtenha o valor do id_projeto da página atual
-                    var id_projeto = <?php echo json_encode($id_projeto); ?>;
 
-                    // Função para carregar e atualizar a tabela
-                    function updateTable_terc() {
-                        // Seleciona a tabela com a id 'list_terc'
-                        var tabela = $('#list_terc');
-
-                        $.ajax({
-                            url: 'partials/paginas/forms/list_terc.php',
-                            type: 'POST',
-                            dataType: 'json',
-                            data: {
-                                id_projeto: id_projeto
-                            }, // Passa o valor do id_projeto via POST
-                            success: function(data) {
-                                // Limpa a tabela antes de preencher com os novos dados
-                                tabela.find('tbody').empty();
-
-                                // Preenche a tabela com os dados recebidos
-                                $.each(data, function(index, row) {
-                                    tabela.find('tbody').append('<tr>' +
-                                        '<td>' + row.cpf_cnpj + '</td>' +
-                                        '<td>' + row.nome + '</td>' +
-                                        '<td>' + row.tipo + '</td>' +
-                                        '<td>' + row.situacao + '</td>' +
-
-                                        '</tr>');
-                                });
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
-                        });
-                    }
-
-                    // Chame a função updateTable() quando a página carregar
-                    updateTable_terc();
-
-                    // Adicione um evento de clique ao botão para atualizar a tabela
-                    $('#updateButton_terc').click(function() {
-                        updateTable_terc(); // Chama a função para atualizar a tabela
-                    });
-                });
-            </script>
 
 
             <script>

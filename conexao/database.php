@@ -2,12 +2,12 @@
 
     // Seleciona as configurações do banco de dados com base no ambiente
 
-    if ($_SERVER['SERVER_NAME'] === 'localhost') {
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $connname = "lei_do_bem";
-} else {
+//     if ($_SERVER['SERVER_NAME'] === 'localhost') {
+//         $servername = "localhost";
+//         $username = "root";
+//         $password = "";
+//         $connname = "lei_do_bem";
+// } else {
 //     require('../ssh/phpseclib-master/phpseclib/Net/SSH2.php');
 
 
@@ -19,14 +19,14 @@
 
     $servername = "banco-matech.cr68o4qiqxql.us-east-1.rds.amazonaws.com";
     $username = "admin";
-    $password = "JlSjm7oNI58qtJcDjBZs";
+    $password = "vr88094852";
     $connname = "u358437276_leidobem";
             // $servidor = "localhost";
             // $usuario = "xpeer_adm";
             // $senha = "xpeer_adm_victor";
             // $dbname = "xpeer_adm";
 
-}
+// }
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $connname);

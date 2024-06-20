@@ -16,6 +16,7 @@
 //     exit('Falha na autenticação SSH');
 // }
 
+
     $servername = "banco-matech.cr68o4qiqxql.us-east-1.rds.amazonaws.com";
     $username = "admin";
     $password = "JlSjm7oNI58qtJcDjBZs";
